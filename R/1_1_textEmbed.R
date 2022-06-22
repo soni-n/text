@@ -288,8 +288,14 @@ textEmbedLayersOutput <- function(x,
     mustWork = TRUE
   ))
 
-  # Select all character variables and make them UTF-8 coded (e.g., BERT wants it that way).
-  data_character_variables <- select_character_v_utf8(x)
+
+  if (model == "hart"){
+    data_character_variables <- x
+  } else {
+    # Select all character variables and make them UTF-8 coded (e.g., BERT wants it that way).
+    data_character_variables <- select_character_v_utf8(x)
+  }
+
 
   # This gives sorted word embeddings based on context (i.e., the entire text is sent to the transformer model)
   if (contexts | single_context_embeddings) {
